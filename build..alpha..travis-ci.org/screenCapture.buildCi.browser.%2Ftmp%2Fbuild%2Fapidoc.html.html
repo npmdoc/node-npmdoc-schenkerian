@@ -1,0 +1,167 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a>schenkerian (v0.6.12)</a>
+</h1>
+<h4>a HTML keyword analyzer</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.schenkerian">module schenkerian</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.schenkerian.schenkerian">
+            function <span class="apidocSignatureSpan"></span>schenkerian
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">schenkerian.</span>reporter</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.schenkerian.reporter">module schenkerian.reporter</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.schenkerian.reporter.reporter">
+            function <span class="apidocSignatureSpan">schenkerian.</span>reporter
+            <span class="apidocSignatureSpan">(res)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.schenkerian" id="apidoc.module.schenkerian">module schenkerian</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.schenkerian.schenkerian" id="apidoc.element.schenkerian.schenkerian">
+        function <span class="apidocSignatureSpan"></span>schenkerian
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function _export(options) {
+  var url = options.url
+  if (options.body) {
+    return analyze(url, options.body, options.returnSource)
+  } else {
+    if (options.tokens) _.merge(options, {jar: cookieJar(options.tokens, url)})
+    return requestAndSendToAnalyze(url, options)
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.schenkerian.reporter" id="apidoc.module.schenkerian.reporter">module schenkerian.reporter</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.schenkerian.reporter.reporter" id="apidoc.element.schenkerian.reporter.reporter">
+        function <span class="apidocSignatureSpan">schenkerian.</span>reporter
+        <span class="apidocSignatureSpan">(res)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">reporter = function (res) {
+  var len = res.length
+    , str = ''
+
+  res.forEach(function (r) {
+    var file = r.file
+      , err = r.error
+
+    if (err.reason.match('a reserved word')) {
+      return --len
+    }
+    if (err.reason.match('to have an indentation at')) {
+      return --len
+    }
+    str += file + ': line ' + err.line + ', col ' +
+    err.character + ', ' + err.reason + '\n'
+  })
+
+  if (str) {
+    process.stdout.write(str + '\n' + len + ' error' +
+    ((len === 1) ? '' : 's') + '\n')
+    process.exit(1)
+  } else {
+    process.stdout.write('Rock on. No Lint errors\n')
+    process.exit(0)
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
